@@ -14,7 +14,9 @@ postLogLine(0);
 function postLogLine(lineNr) {
     let logEntry = clf2JSON(logLines[lineNr]);
     // An die Queue posten -- wir ignorieren Fehlermeldungen
-    axios.post('http://127.0.0.1:3000/queue/', { msg: logEntry }).then();
+    // *******************************************************************************
+    // hier kommt noch queue/push dran bzw für /pubsub/publish
+    axios.post('http://127.0.0.1:3000/pubsub/publish', { msg: logEntry }).then();
 
     // Solange wir noch Zeilen haben: mit Delay erneut aufrufen
     if (lineNr < logLines.length - 1) {
